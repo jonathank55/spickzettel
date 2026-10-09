@@ -9,7 +9,7 @@ Ein hochpräzises, token- und ressourceneffizientes Werkzeug zur schnellen Orien
 ## Besonderheiten & Dynamik
 
 - **Zweidimensionale Raumanpassung:**
-  - **Automatischer Zweispaltensatz:** Ab einer Terminalbreite von 114 Zeichen schaltet das Layout selbsttätig in zwei parallele Spalten um. Eine durchgezogene blaue Mitteltrennlinie (`│`) strukturiert die Blöcke und halbiert die vertikale Scrollstrecke auf großen Bildschirmen.
+  - **Automatischer Zweispaltensatz:** Ab einer Terminalbreite von 114 Zeichen schaltet das Layout selbsttätig in zwei parallele Spalten um. Ein ruhiger, vier Zeichen breiter Zwischenraum trennt die Spalten magazinartig ohne vertikale Linien und halbiert die vertikale Scrollstrecke auf großen Bildschirmen.
   - **Zeilenindividuelle Textdynamik & Mehrstufen-Kaskade:** Jeder Befehl verfügt über bis zu fünf feingliedrig abgestufte Textvarianten (von der ausführlichen Langfassung mit allen Details bis zur ultrakompakten Essenz). Statt ganzer Abschnitte schaltet jede Zeile völlig unabhängig und individuell die maximal inhaltsreiche Variante frei, die exakt in ihren spezifischen Restplatz passt.
   - **Dreistufige Höhendichte:**
     - *Kompakt (`lines < 24`):* Einzeiliges Kopf- und Fußbanner für horizontales Arbeiten in Split-Terminals.
@@ -18,7 +18,8 @@ Ein hochpräzises, token- und ressourceneffizientes Werkzeug zur schnellen Orien
   - **Garantierte Einzeiligkeit:** Sämtliche Befehle und Beschreibungen werden konsequent einzeilig dargestellt. Zeilenumbrüche innerhalb eines Eintrags werden durch mathematisch abgestimmte Spaltenbreiten und zeilenindividuelle Textkaskaden vollständig vermieden.
   - **Kompakte Zweizeilenansicht:** Nur bei extrem schmalen Terminals (< 48 Spalten) oder explizit über das Flag `-k` schaltet das Layout auf eine zweizeilige Darstellung um.
 
-- **Typografische Hervorhebung (optimi-Farbnorm):**
+- **Typografische Hervorhebung & puristische Linienführung (optimi-Farbnorm):**
+  - **Puristische Linienarchitektur:** Sämtliche Trennungslinien unter den Abschnitten und in der Mitte wurden entfernt. Ausschließlich das obere Banner und der Fußbereich werden durch je eine Trennlinie eingerahmt, während der Inhaltsbereich durch Freiräume und Badges atmet.
   - **Überschriften-Badges:** Sämtliche Titel und Themenbereiche heben sich als markante Banner in Royalblau mit strahlend weißer Fettschrift ab.
   - **Code-Badges:** Kommandos sind in dezentem Anthrazit mit leuchtendem Cyan formatiert.
   - **Klare Abstände:** Garantierte Leerzeilen trennen aufeinanderfolgende Abschnitte sauber voneinander.

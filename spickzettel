@@ -723,7 +723,6 @@ def format_section_lines(section_title: str, items: list[tuple], width: int, for
     """Erzeugt formatierte Zeilen eines Abschnitts mit strikter Einzeiligkeits-Garantie."""
     lines = []
     lines.append(make_header_badge(section_title))
-    lines.append(f"{BLUE}{'─' * width}{RESET}")
 
     # Bei erzwungenem Kompaktmodus oder extrem schmalem Fenster (< 48 Spalten): zweizeilige Darstellung
     if force_compact or (width < 48 and not force_table):
@@ -775,16 +774,16 @@ def render_single_column(categories, width: int, force_compact: bool, force_tabl
             print(line)
 
 def render_two_columns(categories, total_width: int, force_compact: bool, force_table: bool, density: str):
-    """Rendert Abschnitte zweispaltig mit vertikaler Trennlinie nebeneinander für breite Monitore."""
-    sep = f"  {BLUE}│{RESET}  "
-    gutter_width = 5
+    """Rendert Abschnitte zweispaltig nebeneinander für breite Monitore."""
+    gutter_width = 4
+    sep = " " * gutter_width
     col_width = (total_width - gutter_width) // 2
 
     for i in range(0, len(categories), 2):
         if i > 0:
-            print(f"{' ' * col_width}{sep}")
+            print()
             if density == "generous":
-                print(f"{' ' * col_width}{sep}")
+                print()
         left_cat = categories[i]
         right_cat = categories[i + 1] if i + 1 < len(categories) else None
 
@@ -799,7 +798,7 @@ def render_two_columns(categories, total_width: int, force_compact: bool, force_
             if r_line:
                 print(f"{padded_left}{sep}{r_line}")
             else:
-                print(f"{padded_left}{sep}")
+                print(f"{padded_left}")
 
 def main():
     parser = argparse.ArgumentParser(
