@@ -10,7 +10,7 @@ Ein hochpräzises, token- und ressourceneffizientes Werkzeug zur schnellen Orien
 
 - **Zweidimensionale Raumanpassung:**
   - **Automatischer Zweispaltensatz:** Ab einer Terminalbreite von 114 Zeichen schaltet das Layout selbsttätig in zwei parallele Spalten um. Eine durchgezogene blaue Mitteltrennlinie (`│`) strukturiert die Blöcke und halbiert die vertikale Scrollstrecke auf großen Bildschirmen.
-  - **Mikro-adaptive Textauswahl:** Das Programm prüft auf Zeichenebene für jeden einzelnen Eintrag, ob die ausführliche Langfassung ohne Zeilenumbruch in die Spalte passt. Nur wenn sie umbrechen müsste, wechselt die Engine fließend zur prägnanten Kurzfassung.
+  - **Zeilenindividuelle Textdynamik & Mehrstufen-Kaskade:** Jeder Befehl verfügt über bis zu fünf feingliedrig abgestufte Textvarianten (von der ausführlichen Langfassung mit allen Details bis zur ultrakompakten Essenz). Statt ganzer Abschnitte schaltet jede Zeile völlig unabhängig und individuell die maximal inhaltsreiche Variante frei, die exakt in ihren spezifischen Restplatz passt.
   - **Dreistufige Höhendichte:**
     - *Kompakt (`lines < 24`):* Einzeiliges Kopf- und Fußbanner für horizontales Arbeiten in Split-Terminals.
     - *Normal (`24 <= lines < 38`):* Standardabstände mit klarer Strukturierung.
