@@ -15,8 +15,8 @@ Ein hochpräzises, token- und ressourceneffizientes Werkzeug zur schnellen Orien
     - *Kompakt (`lines < 24`):* Einzeiliges Kopf- und Fußbanner für horizontales Arbeiten in Split-Terminals.
     - *Normal (`24 <= lines < 38`):* Standardabstände mit klarer Strukturierung.
     - *Großzügig (`lines >= 38`):* Atmende Doppelabstände für Vollbildterminals und große Monitore.
-  - **Geschützter hängender Einzug:** Bei sehr langen Texten brechen Folgezeilen sauber bündig ab der Beschreibungsspalte um.
-  - **Kompakte Zweizeilenansicht:** Bei extrem schmalen Terminals (< 54 Spalten) oder über das Flag `-k` schaltet das Layout auf eine platzsparende Zweizeilenform um.
+  - **Garantierte Einzeiligkeit:** Sämtliche Befehle und Beschreibungen werden konsequent einzeilig dargestellt. Zeilenumbrüche innerhalb eines Eintrags werden durch mathematisch abgestimmte Spaltenbreiten und zeilenindividuelle Textkaskaden vollständig vermieden.
+  - **Kompakte Zweizeilenansicht:** Nur bei extrem schmalen Terminals (< 48 Spalten) oder explizit über das Flag `-k` schaltet das Layout auf eine zweizeilige Darstellung um.
 
 - **Typografische Hervorhebung (optimi-Farbnorm):**
   - **Überschriften-Badges:** Sämtliche Titel und Themenbereiche heben sich als markante Banner in Royalblau mit strahlend weißer Fettschrift ab.

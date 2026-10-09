@@ -126,7 +126,7 @@ CATEGORIES = [
                 "Offizielles Handbuch öffnen",
                 "Handbuch öffnen",
             ]),
-            ("befehl -h (oder --help)", [
+            ("befehl -h / --help", [
                 "Kurzhilfe und wichtigste Parameter anzeigen",
                 "Kurzhilfe und Parameter anzeigen",
                 "Kurzhilfe anzeigen",
@@ -239,6 +239,7 @@ CATEGORIES = [
                 "Gesamten Dateiinhalt auf einmal ausgeben",
                 "Gesamten Dateiinhalt ausgeben",
                 "Dateiinhalt ausgeben",
+                "Inhalt ausgeben",
             ]),
             ("less datei.txt", [
                 "In Datei blättern (q zum Beenden, / zum Suchen)",
@@ -250,24 +251,28 @@ CATEGORIES = [
                 "Erste 20 Zeilen einer Datei im Terminal anzeigen",
                 "Erste 20 Zeilen einer Datei anzeigen",
                 "Erste 20 Zeilen anzeigen",
+                "Erste 20 Zeilen",
             ]),
             ("tail -n 20 datei.txt", [
                 "Letzte 20 Zeilen einer Datei im Terminal anzeigen",
                 "Letzte 20 Zeilen einer Datei anzeigen",
                 "Letzte 20 Zeilen anzeigen",
+                "Letzte 20 Zeilen",
             ]),
             ("tail -f log.txt", [
                 "Datei live und fortlaufend auf neue Zeilen überwachen",
                 "Datei live auf neue Zeilen überwachen",
                 "Datei live überwachen",
+                "Live überwachen",
             ]),
-            ('grep "Suchbegriff" datei.txt', [
+            ('grep "text" datei.txt', [
                 "Datei gezielt nach bestimmtem Begriff durchsuchen",
                 "Datei gezielt nach Text durchsuchen",
                 "Datei nach Text durchsuchen",
                 "Datei durchsuchen",
+                "Durchsuchen",
             ]),
-            ('grep -rn "Suchbegriff" .', [
+            ('grep -rn "text" .', [
                 "Ordner rekursiv mit Zeilennummern nach Begriff durchsuchen",
                 "Ordner rekursiv mit Zeilennummern durchsuchen",
                 "Ordner rekursiv durchsuchen",
@@ -288,7 +293,7 @@ CATEGORIES = [
                 "Datei/Ordner umbenennen",
                 "Umbenennen",
             ]),
-            ('mv datei.txt "Zielordner/"', [
+            ('mv datei.txt ordner/', [
                 "Datei in einen anderen Zielordner verschieben",
                 "Datei in einen anderen Ordner verschieben",
                 "In Ordner verschieben",
@@ -300,18 +305,18 @@ CATEGORIES = [
                 "Vor dem Überschreiben nachfragen",
                 "Vor Überschreiben fragen",
             ]),
-            ("cp datei.txt datei_kopie.txt", [
+            ("cp datei.txt kopie.txt", [
                 "Einzelne Datei duplizieren oder kopieren",
                 "Einzelne Datei duplizieren",
                 "Datei duplizieren",
             ]),
-            ('cp -r "Ordner" "Kopie/"', [
+            ('cp -r ordner/ kopie/', [
                 "Ganzen Ordner rekursiv samt Unterordnern kopieren",
                 "Ganzen Ordner rekursiv kopieren",
                 "Ordner rekursiv kopieren",
                 "Ordner kopieren",
             ]),
-            ('cp -i datei.txt "Zielordner/"', [
+            ('cp -i datei.txt ordner/', [
                 "Sicherheitsabfrage vor Überschreiben bei Kopie stellen",
                 "Sicherheitsabfrage vor Überschreiben bei Kopie",
                 "Vor Überschreiben bei Kopie nachfragen",
@@ -368,7 +373,8 @@ CATEGORIES = [
                 "Unterschiede zwischen zwei Textdateien zeilenweise anzeigen",
                 "Unterschiede zwischen zwei Dateien anzeigen",
                 "Unterschiede zweier Dateien anzeigen",
-                "Unterschiede anzeigen",
+                "Dateien vergleichen",
+                "Unterschiede",
             ]),
             ("file datei", [
                 "Echten Dateityp ermitteln (unabhängig von Dateiendung)",
@@ -396,11 +402,12 @@ CATEGORIES = [
     (
         "8. KOMPRIMIERUNG & ARCHIVE",
         [
-            ('zip -r archiv.zip "Ordner"', [
+            ('zip -r archiv.zip ordner/', [
                 "Ordner rekursiv als ZIP-Archiv komprimieren",
                 "Ordner als ZIP-Archiv komprimieren",
                 "Als ZIP-Archiv komprimieren",
                 "Als ZIP komprimieren",
+                "ZIP komprimieren",
             ]),
             ("unzip archiv.zip", [
                 "Bestehendes ZIP-Archiv vollständig entpacken",
@@ -408,11 +415,12 @@ CATEGORIES = [
                 "ZIP-Archiv entpacken",
                 "ZIP entpacken",
             ]),
-            ('tar -czf archiv.tar.gz "Ordner"', [
+            ('tar -czf archiv.tar.gz ordner/', [
                 "Ordner als komprimiertes tar.gz-Archiv packen",
                 "Ordner als tar.gz-Archiv komprimieren",
                 "Als tar.gz-Archiv komprimieren",
                 "Als tar.gz komprimieren",
+                "tar.gz packen",
             ]),
             ("tar -xzf archiv.tar.gz", [
                 "Komprimiertes tar.gz-Archiv vollständig entpacken",
@@ -539,37 +547,37 @@ CATEGORIES = [
                 "Nächsten Befehl abrufen",
                 "Nächster Befehl",
             ]),
-            ("Strg / Ctrl + C", [
+            ("Strg + C", [
                 "Laufenden Befehl oder Prozess sofort abbrechen",
                 "Laufenden Befehl sofort abbrechen",
                 "Befehl sofort abbrechen",
                 "Befehl abbrechen",
             ]),
-            ("Strg / Ctrl + L", [
+            ("Strg + L", [
                 "Bildschirm vollständig leeren (Alternative: clear)",
                 "Bildschirm leeren (Alternative: clear)",
                 "Bildschirm vollständig leeren",
                 "Bildschirm leeren",
             ]),
-            ("Strg / Ctrl + R", [
+            ("Strg + R", [
                 "Gesamten Befehlsverlauf interaktiv durchsuchen",
                 "Befehlsverlauf interaktiv durchsuchen",
                 "Befehlsverlauf durchsuchen",
                 "Verlauf durchsuchen",
             ]),
-            ("Strg / Ctrl + A", [
+            ("Strg + A", [
                 "Cursor sofort an den Anfang der Zeile setzen",
                 "Cursor an den Zeilenanfang setzen",
                 "An den Zeilenanfang setzen",
                 "An den Zeilenanfang",
             ]),
-            ("Strg / Ctrl + E", [
+            ("Strg + E", [
                 "Cursor sofort an das Ende der Zeile setzen",
                 "Cursor an das Zeilenende setzen",
                 "An das Zeilenende setzen",
                 "An das Zeilenende",
             ]),
-            ("Strg / Ctrl + U", [
+            ("Strg + U", [
                 "Gesamte Befehlszeile vor dem Cursor löschen",
                 "Gesamte Zeile vor Cursor löschen",
                 "Zeile vor Cursor löschen",
@@ -693,13 +701,12 @@ def print_footer(width: int, density: str = "normal"):
     print(f"{lead}{BLUE}{'━' * width}{RESET}")
 
     if density == "compact":
-        print(f"{BOLD}Nav:{RESET} Pfeile | {BOLD}Tab:{RESET} Auto | {BOLD}Hilfe:{RESET} sz -h | {BOLD}Suche:{RESET} sz -s <begriff>\n")
+        print(f"{BOLD}Optionen:{RESET} {CYAN}sz -h{RESET} (Hilfe) | {CYAN}sz -s <begriff>{RESET} (Suchen)\n")
     else:
-        print(f"{BOLD}Navigation:{RESET} Pfeiltasten für Befehlsverlauf | {BOLD_CYAN}[Tab]{RESET} Autovervollständigung")
         print(f"{BOLD}Optionen:{RESET} {CYAN}sz -h{RESET} (Hilfe) | {CYAN}sz -k{RESET} (Kompakt) | {CYAN}sz -s <begriff>{RESET} (Suchen)\n")
 
 def calc_optimal_cmd_col(items: list[tuple], width: int) -> int:
-    """Berechnet die maßgeschneiderte Spaltenbreite für Befehls-Badges im Abschnitt."""
+    """Berechnet die Spaltenbreite für Befehls-Badges so, dass Einzeiligkeit gewahrt bleibt."""
     badge_lens = [visible_len(make_cmd_badge(it[0])) for it in items]
     if not badge_lens:
         return 20
@@ -707,28 +714,19 @@ def calc_optimal_cmd_col(items: list[tuple], width: int) -> int:
     sorted_lens = sorted(badge_lens)
     max_cmd = sorted_lens[-1]
 
-    # Begrenze die Befehlsspalte dynamisch auf maximal 44 % der Abschnittsbreite
-    max_allowed = max(14, int(width * 0.44))
+    # Garantiere mindestens 16 Zeichen für die Beschreibung rechts
+    max_allowed = max(14, width - 4 - 2 - 16)
     cmd_col = min(max_cmd, max_allowed)
-    desc_avail = width - 4 - cmd_col - 2
-
-    # Wenn der Platz für die Beschreibung knapp ist (< 34 Zeichen) und der längste Befehl ein Ausreißer ist
-    if desc_avail < 34 and len(sorted_lens) > 3:
-        p75_idx = int(len(sorted_lens) * 0.75)
-        p75_len = sorted_lens[p75_idx]
-        if max_cmd - p75_len >= 5:
-            cmd_col = min(p75_len, max_allowed)
-
     return cmd_col
 
 def format_section_lines(section_title: str, items: list[tuple], width: int, force_compact: bool, force_table: bool) -> list[str]:
-    """Erzeugt formatierte Zeilen eines Abschnitts mit zeilenspezifisch dynamischem Text."""
+    """Erzeugt formatierte Zeilen eines Abschnitts mit strikter Einzeiligkeits-Garantie."""
     lines = []
     lines.append(make_header_badge(section_title))
     lines.append(f"{BLUE}{'─' * width}{RESET}")
 
-    # Bei erzwungenem Kompaktmodus oder extrem schmalem Fenster (< 54 Spalten): reine Zweizeilenform
-    if force_compact or (width < 54 and not force_table):
+    # Bei erzwungenem Kompaktmodus oder extrem schmalem Fenster (< 48 Spalten): zweizeilige Darstellung
+    if force_compact or (width < 48 and not force_table):
         for item in items:
             cmd = item[0]
             badge = make_cmd_badge(cmd)
@@ -739,9 +737,9 @@ def format_section_lines(section_title: str, items: list[tuple], width: int, for
                 lines.append(f"    {l}")
         return lines
 
-    # Dynamische Tabellenberechnung mit zeilenspezifischer Platz- und Variantenauswahl
-    cmd_col = calc_optimal_cmd_col(items, width)
+    # Dynamische einzeilige Tabellendarstellung (verhindert konsequent Umbrüche auf 2 Zeilen)
     gap = 2
+    cmd_col = calc_optimal_cmd_col(items, width)
 
     for item in items:
         cmd = item[0]
@@ -749,24 +747,20 @@ def format_section_lines(section_title: str, items: list[tuple], width: int, for
         b_len = visible_len(badge)
 
         if b_len <= cmd_col:
-            # Zeile passt in die Tabellenspalte: Bündige Textspalte
             avail = max(10, width - 4 - cmd_col - gap)
             desc = pick_fluid_description(item, avail)
-
+            # Sanfter Längenschnitt auf Zeichenebene zur absoluten Verhinderung von Folgezeilen
+            if len(desc) > avail:
+                desc = desc[:avail]
             padded_badge = pad_visible(badge, cmd_col)
-            desc_space = max(10, width - 4 - cmd_col - gap)
-            wrapped = textwrap.wrap(desc, width=desc_space)
-            first_line = wrapped[0] if wrapped else ""
-            lines.append(f"  {BOLD_BLUE}▸{RESET} {padded_badge}{' ' * gap}{first_line}")
-            for extra_line in wrapped[1:]:
-                lines.append(f"    {' ' * cmd_col}{' ' * gap}{extra_line}")
+            lines.append(f"  {BOLD_BLUE}▸{RESET} {padded_badge}{' ' * gap}{desc}")
         else:
-            # Ausreißer: Befehl oben, Beschreibung in Folgezeile mit voller Zeilenbreite
-            avail_next = max(16, width - 4)
-            desc = pick_fluid_description(item, avail_next)
-            lines.append(f"  {BOLD_BLUE}▸{RESET} {badge}")
-            for extra_line in textwrap.wrap(desc, width=avail_next):
-                lines.append(f"    {extra_line}")
+            # Längerer Befehl: direkt mit 1 Leerzeichen gefolgt von der Beschreibung in derselben Zeile
+            avail = max(8, width - 4 - b_len - 1)
+            desc = pick_fluid_description(item, avail)
+            if len(desc) > avail:
+                desc = desc[:avail]
+            lines.append(f"  {BOLD_BLUE}▸{RESET} {badge} {desc}")
 
     return lines
 
