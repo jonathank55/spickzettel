@@ -19,7 +19,7 @@ Ein hochpräzises, token- und ressourceneffizientes Werkzeug zur schnellen Orien
   - **Kompakte Zweizeilenansicht:** Nur bei extrem schmalen Terminals (< 48 Spalten) oder explizit über das Flag `-k` schaltet das Layout auf eine zweizeilige Darstellung um.
 
 - **Typografische Hervorhebung & puristische Linienführung (optimi-Farbnorm):**
-  - **Puristische Linienarchitektur:** Sämtliche Trennungslinien unter den Abschnitten und in der Mitte wurden entfernt. Ausschließlich das obere Banner und der Fußbereich werden durch je eine Trennlinie eingerahmt, während der Inhaltsbereich durch Freiräume und Badges atmet.
+  - **Puristische Linienarchitektur & atmende Abstände:** Sämtliche Trennungslinien unter den Abschnitten und in der Mitte wurden entfernt. Ausschließlich das obere Banner und der Fußbereich werden durch je eine Trennlinie eingerahmt, die bei der großen Version vor und nach sich durch atmende Freiräume (Leerzeilen) eingefasst ist, während der Inhaltsbereich durch Freiräume und Badges strukturiert wird.
   - **Überschriften-Badges:** Sämtliche Titel und Themenbereiche heben sich als markante Banner in Royalblau mit strahlend weißer Fettschrift ab.
   - **Code-Badges:** Kommandos sind in dezentem Anthrazit mit leuchtendem Cyan formatiert.
   - **Klare Abstände:** Garantierte Leerzeilen trennen aufeinanderfolgende Abschnitte sauber voneinander.

@@ -671,7 +671,7 @@ def filter_entries(search_term: str):
             total_matches += len(matching_items)
     return filtered, total_matches
 
-def print_banner(width: int, search_term: str = None, match_count: int = 0, density: str = "normal"):
+def print_banner(width: int, search_term: str = None, match_count: int = 0, density: str = "normal", is_large: bool = False):
     """Gibt den Programmkopf anhand der dreistufigen Höhendichte aus."""
     banner_text = "TERMINAL-SPICKZETTEL"
     badge = make_header_badge(banner_text)
@@ -693,12 +693,20 @@ def print_banner(width: int, search_term: str = None, match_count: int = 0, dens
         print(f"{badge}")
         print(sub_text)
 
-    print(f"{BLUE}{'─' * width}{RESET}")
+    # Trennungslinie oben: Bei der großen Version mit atmenden Abständen davor und danach
+    if is_large:
+        print(f"\n{BLUE}{'─' * width}{RESET}\n")
+    else:
+        print(f"{BLUE}{'─' * width}{RESET}")
 
-def print_footer(width: int, density: str = "normal"):
+def print_footer(width: int, density: str = "normal", is_large: bool = False):
     """Gibt die Abschlusszeile anhand der dreistufigen Höhendichte aus."""
-    lead = "\n" if density == "generous" else ""
-    print(f"{lead}{BLUE}{'━' * width}{RESET}")
+    # Trennungslinie unten: Bei der großen Version mit atmenden Abständen davor und danach
+    if is_large:
+        print(f"\n{BLUE}{'━' * width}{RESET}\n")
+    else:
+        lead = "\n" if density == "generous" else ""
+        print(f"{lead}{BLUE}{'━' * width}{RESET}")
 
     if density == "compact":
         print(f"{BOLD}Optionen:{RESET} {CYAN}sz -h{RESET} (Hilfe) | {CYAN}sz -s <begriff>{RESET} (Suchen)\n")
@@ -834,17 +842,18 @@ def main():
         active_categories = CATEGORIES
         match_count = sum(len(items) for _, items in CATEGORIES)
 
-    print_banner(width, search_term=args.suche, match_count=match_count, density=density)
-
     # Automatische Wahl: Zweispaltensatz ab 114 Spalten (sofern nicht anders erzwungen), sonst einspaltig
     use_two_cols = (width >= 114) and (not args.single_col) and (not args.kompakt) and (len(active_categories) > 1)
+    is_large = (density == "generous") or use_two_cols or (lines >= 30 and not args.kompakt)
+
+    print_banner(width, search_term=args.suche, match_count=match_count, density=density, is_large=is_large)
 
     if use_two_cols:
         render_two_columns(active_categories, width, args.kompakt, args.tabelle, density)
     else:
         render_single_column(active_categories, width, args.kompakt, args.tabelle, density)
 
-    print_footer(width, density=density)
+    print_footer(width, density=density, is_large=is_large)
 
 if __name__ == "__main__":
     main()
