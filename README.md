@@ -10,10 +10,13 @@ Ein hochpräzises, token- und ressourceneffizientes Werkzeug zur schnellen Orien
 
 - **Zweidimensionale Raumanpassung:**
   - **Automatischer Zweispaltensatz:** Ab einer Terminalbreite von 114 Zeichen schaltet das Layout selbsttätig in zwei parallele Spalten um. Eine durchgezogene blaue Mitteltrennlinie (`│`) strukturiert die Blöcke und halbiert die vertikale Scrollstrecke auf großen Bildschirmen.
-  - **Dynamische Spaltenberechnung:** In schmaleren Fenstern passt sich die Befehlsspalte flexibel an die tatsächlich vorkommenden Befehlslängen des jeweiligen Abschnitts an.
-  - **Geschützter hängender Einzug:** Lange Erläuterungen brechen sauber bündig an der Beschreibungsspalte um.
+  - **Mikro-adaptive Textauswahl:** Das Programm prüft auf Zeichenebene für jeden einzelnen Eintrag, ob die ausführliche Langfassung ohne Zeilenumbruch in die Spalte passt. Nur wenn sie umbrechen müsste, wechselt die Engine fließend zur prägnanten Kurzfassung.
+  - **Dreistufige Höhendichte:**
+    - *Kompakt (`lines < 24`):* Einzeiliges Kopf- und Fußbanner für horizontales Arbeiten in Split-Terminals.
+    - *Normal (`24 <= lines < 38`):* Standardabstände mit klarer Strukturierung.
+    - *Großzügig (`lines >= 38`):* Atmende Doppelabstände für Vollbildterminals und große Monitore.
+  - **Geschützter hängender Einzug:** Bei sehr langen Texten brechen Folgezeilen sauber bündig ab der Beschreibungsspalte um.
   - **Kompakte Zweizeilenansicht:** Bei extrem schmalen Terminals (< 54 Spalten) oder über das Flag `-k` schaltet das Layout auf eine platzsparende Zweizeilenform um.
-  - **Höhenadaptive Dichte:** Bei flachen Terminalfenstern (< 28 Zeilen) wird die vertikale Zeilendichte automatisch optimiert.
 
 - **Typografische Hervorhebung (optimi-Farbnorm):**
   - **Überschriften-Badges:** Sämtliche Titel und Themenbereiche heben sich als markante Banner in Royalblau mit strahlend weißer Fettschrift ab.
