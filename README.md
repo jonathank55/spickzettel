@@ -20,7 +20,7 @@ Ein hochpräzises, token- und ressourceneffizientes Werkzeug zur schnellen Orien
 
 - **Typografische Hervorhebung & puristische Linienführung (optimi-Farbnorm):**
   - **Puristische Linienarchitektur & atmende Abstände:** Sämtliche Trennungslinien unter den Abschnitten und in der Mitte wurden entfernt. Ausschließlich das obere Banner und der Fußbereich werden durch je eine Trennlinie eingerahmt, die bei der großen Version vor und nach sich durch atmende Freiräume (Leerzeilen) eingefasst ist, während der Inhaltsbereich durch Freiräume und Badges strukturiert wird.
-  - **Überschriften-Badges:** Sämtliche Titel und Themenbereiche heben sich als markante Banner in Royalblau mit strahlend weißer Fettschrift ab.
+  - **Programmtitel & Überschriften-Badges:** Der Haupttitel TERMINAL-SPICKZETTEL steht puristisch in reinem Fettdruck ohne Hintergrundfarbe und ohne Farbeffekte da, während sich die thematischen Abschnittsüberschriften als markante Banner in Royalblau mit weißer Fettschrift abheben.
   - **Code-Badges:** Kommandos sind in dezentem Anthrazit mit leuchtendem Cyan formatiert.
   - **Klare Abstände:** Garantierte Leerzeilen trennen aufeinanderfolgende Abschnitte sauber voneinander.
 

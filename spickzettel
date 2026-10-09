@@ -673,8 +673,7 @@ def filter_entries(search_term: str):
 
 def print_banner(width: int, search_term: str = None, match_count: int = 0, density: str = "normal", is_large: bool = False):
     """Gibt den Programmkopf anhand der dreistufigen Höhendichte aus."""
-    banner_text = "TERMINAL-SPICKZETTEL"
-    badge = make_header_badge(banner_text)
+    banner_title = f"{BOLD}TERMINAL-SPICKZETTEL{RESET}"
 
     if search_term:
         sub_text = f"{BOLD}Suchfilter:{RESET} '{search_term}' {BOLD}({match_count} Treffer){RESET}"
@@ -685,12 +684,12 @@ def print_banner(width: int, search_term: str = None, match_count: int = 0, dens
     # Stufe 1 (Kompakt bei flachem Fenster): Einzeiliger Kopf
     if density == "compact":
         short_sub = f"{len(CATEGORIES)} Abschnitte · {sum(len(items) for _, items in CATEGORIES)} Befehle" if not search_term else f"'{search_term}' ({match_count} Treffer)"
-        print(f"{badge}  {BOLD}{short_sub}{RESET}")
+        print(f"{banner_title}  {BOLD}{short_sub}{RESET}")
     elif density == "generous":
-        print(f"\n{badge}")
+        print(f"\n{banner_title}")
         print(sub_text)
     else:
-        print(f"{badge}")
+        print(f"{banner_title}")
         print(sub_text)
 
     # Trennungslinie oben: Bei der großen Version mit atmenden Abständen davor und danach
