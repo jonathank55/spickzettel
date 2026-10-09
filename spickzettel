@@ -5,8 +5,8 @@ spickzettel
 ===========
 Standardisierter Terminal-Spickzettel für macOS mit volladaptiver zweidimensionaler
 Raumanpassung, optimi-Farbnorm und SingleLineHelpFormatter.
-Bietet dezente Hintergrund-Hervorhebungen für Überschriften und Befehle,
-stufenlose Breiten- und Höhendynamik sowie automatischen Ein- und Zweispaltensatz.
+Bietet dynamische Beschreibungsvarianten (Prägnant bei schmalem Fenster, ausführlich
+bei breiter Ansicht), Hintergrund-Badges sowie automatischen Ein- und Zweispaltensatz.
 """
 
 import sys
@@ -72,150 +72,160 @@ def make_cmd_badge(cmd: str) -> str:
         return f"{BG_CMD} {cmd} {RESET}"
     return f"{BOLD_CYAN}{cmd}{RESET}"
 
+# Einträge mit (Befehl, Langfassung, Kurzfassung für schmale Fenster/Spalten)
 CATEGORIES = [
     (
         "1. ORIENTIERUNG & HILFE",
         [
-            ("pwd", "Pfad des aktuellen Verzeichnisses anzeigen"),
-            ("ls", "Dateien und Ordner auflisten"),
-            ("ls -l", "Detaillierte Liste (Rechte, Größe, Datum)"),
-            ("ls -a", "Auch versteckte Dateien anzeigen (.datei)"),
-            ("ls -la", "Kombination: Detailliert inkl. versteckter Dateien"),
-            ("ls -lh", "Detaillierte Liste mit lesbaren Dateigrößen (KB, MB, GB)"),
-            ("which befehl", "Pfad des Programms/Befehls anzeigen"),
-            ("man befehl", "Offizielles Handbuch öffnen (q zum Beenden)"),
-            ("befehl -h (oder --help)", "Kurzhilfe und Parameter anzeigen"),
+            ("pwd", "Pfad des aktuellen Verzeichnisses anzeigen", "Aktuellen Pfad anzeigen"),
+            ("ls", "Dateien und Ordner auflisten", "Inhalte auflisten"),
+            ("ls -l", "Detaillierte Liste (Rechte, Größe, Datum)", "Detaillierte Liste"),
+            ("ls -a", "Auch versteckte Dateien anzeigen (.datei)", "Versteckte Dateien anzeigen"),
+            ("ls -la", "Kombination: Detailliert inkl. versteckter Dateien", "Detailliert inkl. versteckter"),
+            ("ls -lh", "Detaillierte Liste mit lesbaren Dateigrößen (KB, MB, GB)", "Liste mit lesbaren Größen"),
+            ("which befehl", "Pfad des Programms/Befehls anzeigen", "Programmpfad anzeigen"),
+            ("man befehl", "Offizielles Handbuch öffnen (q zum Beenden)", "Handbuch öffnen"),
+            ("befehl -h (oder --help)", "Kurzhilfe und Parameter anzeigen", "Kurzhilfe anzeigen"),
         ],
     ),
     (
         "2. VERZEICHNIS WECHSELN",
         [
-            ('cd "Ordner"', "In Ordner wechseln (immer Anführungszeichen bei Leerzeichen)"),
-            ("cd ..", "Eine Ebene nach oben gehen"),
-            ("cd ../..", "Zwei Ebenen nach oben gehen"),
-            ("cd", "Direkt ins Benutzerverzeichnis springen (Home)"),
-            ("cd ~", "Ebenfalls direkter Sprung ins Home-Verzeichnis"),
-            ("cd /", "Ins Wurzelverzeichnis springen (Root)"),
-            ("cd -", "Zurück zum zuletzt besuchten Ordner springen"),
-            ('pushd "Ordner"', "In Ordner wechseln und alten Ort merken"),
-            ("popd", "Zurück zum gemerkten Ort springen"),
+            ('cd "Ordner"', "In Ordner wechseln (immer Anführungszeichen bei Leerzeichen)", "In Ordner wechseln"),
+            ("cd ..", "Eine Ebene nach oben gehen", "Ebene nach oben"),
+            ("cd ../..", "Zwei Ebenen nach oben gehen", "Zwei Ebenen nach oben"),
+            ("cd", "Direkt ins Benutzerverzeichnis springen (Home)", "Ins Home springen"),
+            ("cd ~", "Ebenfalls direkter Sprung ins Home-Verzeichnis", "Ins Home springen"),
+            ("cd /", "Ins Wurzelverzeichnis springen (Root)", "Ins Root springen"),
+            ("cd -", "Zurück zum zuletzt besuchten Ordner springen", "Zum vorherigen Ordner"),
+            ('pushd "Ordner"', "In Ordner wechseln und alten Ort merken", "Wechseln und Ort merken"),
+            ("popd", "Zurück zum gemerkten Ort springen", "Zum gemerkten Ort"),
         ],
     ),
     (
         "3. DATEIEN ERSTELLEN & BEARBEITEN",
         [
-            ("touch datei.txt", "Neue leere Datei erstellen (oder Zeitstempel aktualisieren)"),
-            ('mkdir "Ordner"', "Neuen Ordner erstellen"),
-            ('mkdir -p "A/B/C"', "Ganze Ordnerhierarchien auf einmal anlegen"),
-            ("nano datei.txt", "Einfachen Texteditor im Terminal öffnen"),
-            ("vim datei.txt", "Fortgeschrittenen Editor öffnen (Beenden mit :q!)"),
-            ("chmod +x skript.sh", "Datei oder Skript ausführbar machen"),
+            ("touch datei.txt", "Neue leere Datei erstellen (oder Zeitstempel aktualisieren)", "Leere Datei erstellen"),
+            ('mkdir "Ordner"', "Neuen Ordner erstellen", "Neuen Ordner erstellen"),
+            ('mkdir -p "A/B/C"', "Ganze Ordnerhierarchien auf einmal anlegen", "Ordnerhierarchie anlegen"),
+            ("nano datei.txt", "Einfachen Texteditor im Terminal öffnen", "Einfachen Editor öffnen"),
+            ("vim datei.txt", "Fortgeschrittenen Editor öffnen (Beenden mit :q!)", "Fortgeschrittenen Editor"),
+            ("chmod +x skript.sh", "Datei oder Skript ausführbar machen", "Ausführbar machen"),
         ],
     ),
     (
         "4. DATEIEN LESEN & DURCHSUCHEN",
         [
-            ("cat datei.txt", "Gesamten Dateiinhalt auf einmal ausgeben"),
-            ("less datei.txt", "In Datei blättern (q zum Beenden, / zum Suchen)"),
-            ("head -n 20 datei.txt", "Erste 20 Zeilen einer Datei anzeigen"),
-            ("tail -n 20 datei.txt", "Letzte 20 Zeilen einer Datei anzeigen"),
-            ("tail -f log.txt", "Datei live auf neue Zeilen überwachen"),
-            ('grep "Suchbegriff" datei.txt', "Datei nach Text durchsuchen"),
-            ('grep -rn "Suchbegriff" .', "Ordner rekursiv mit Zeilennummern durchsuchen"),
-            ("wc -l datei.txt", "Zeilen einer Datei zählen"),
+            ("cat datei.txt", "Gesamten Dateiinhalt auf einmal ausgeben", "Dateiinhalt ausgeben"),
+            ("less datei.txt", "In Datei blättern (q zum Beenden, / zum Suchen)", "In Datei blättern"),
+            ("head -n 20 datei.txt", "Erste 20 Zeilen einer Datei anzeigen", "Erste 20 Zeilen anzeigen"),
+            ("tail -n 20 datei.txt", "Letzte 20 Zeilen einer Datei anzeigen", "Letzte 20 Zeilen anzeigen"),
+            ("tail -f log.txt", "Datei live auf neue Zeilen überwachen", "Datei live überwachen"),
+            ('grep "Suchbegriff" datei.txt', "Datei nach Text durchsuchen", "Datei nach Text durchsuchen"),
+            ('grep -rn "Suchbegriff" .', "Ordner rekursiv mit Zeilennummern durchsuchen", "Rekursiv durchsuchen"),
+            ("wc -l datei.txt", "Zeilen einer Datei zählen", "Zeilen zählen"),
         ],
     ),
     (
         "5. DATEIEN VERSCHIEBEN, UMBENENNEN & KOPIEREN",
         [
-            ('mv "alt" "neu"', "Datei oder Ordner umbenennen"),
-            ('mv datei.txt "Zielordner/"', "Datei in einen anderen Ordner verschieben"),
-            ('mv -i "alt" "neu"', "Sicherheitsabfrage vor dem Überschreiben"),
-            ("cp datei.txt datei_kopie.txt", "Einzelne Datei duplizieren"),
-            ('cp -r "Ordner" "Kopie/"', "Ganzen Ordner rekursiv kopieren"),
-            ('cp -i datei.txt "Zielordner/"', "Sicherheitsabfrage vor Überschreiben bei Kopie"),
+            ('mv "alt" "neu"', "Datei oder Ordner umbenennen", "Datei/Ordner umbenennen"),
+            ('mv datei.txt "Zielordner/"', "Datei in einen anderen Ordner verschieben", "In Ordner verschieben"),
+            ('mv -i "alt" "neu"', "Sicherheitsabfrage vor dem Überschreiben", "Vor Überschreiben fragen"),
+            ("cp datei.txt datei_kopie.txt", "Einzelne Datei duplizieren", "Datei duplizieren"),
+            ('cp -r "Ordner" "Kopie/"', "Ganzen Ordner rekursiv kopieren", "Ordner rekursiv kopieren"),
+            ('cp -i datei.txt "Zielordner/"', "Sicherheitsabfrage vor Überschreiben bei Kopie", "Vor Überschreiben fragen"),
         ],
     ),
     (
         "6. DATEIEN & ORDNER LÖSCHEN",
         [
-            ("rm datei.txt", "Datei unwiderruflich löschen (kein Papierkorb!)"),
-            ("rm -i datei.txt", "Vor dem Löschen nach Bestätigung fragen"),
-            ('rm -r "Ordner"', "Ganzen Ordner samt Inhalt löschen"),
-            ('rm -rf "Ordner"', "Erzwungenes Löschen ohne jede Nachfrage (Vorsicht!)"),
-            ('rmdir "Leerer_Ordner"', "Nur leere Verzeichnisse entfernen"),
+            ("rm datei.txt", "Datei unwiderruflich löschen (kein Papierkorb!)", "Datei unwiderruflich löschen"),
+            ("rm -i datei.txt", "Vor dem Löschen nach Bestätigung fragen", "Vor Löschen nachfragen"),
+            ('rm -r "Ordner"', "Ganzen Ordner samt Inhalt löschen", "Ordner samt Inhalt löschen"),
+            ('rm -rf "Ordner"', "Erzwungenes Löschen ohne jede Nachfrage (Vorsicht!)", "Erzwungenes Löschen"),
+            ('rmdir "Leerer_Ordner"', "Nur leere Verzeichnisse entfernen", "Leere Ordner entfernen"),
         ],
     ),
     (
         "7. DATEIEN FINDEN & SPEICHER PRÜFEN",
         [
-            ('find . -name "*.txt"', "Aktuellen Ordner rekursiv nach Dateinamen durchsuchen"),
-            ("diff datei1.txt datei2.txt", "Unterschiede zwischen zwei Dateien anzeigen"),
-            ("file datei", "Echten Dateityp ermitteln (unabhängig von Endung)"),
-            ('du -sh "Ordner"', "Speicherplatzverbrauch eines Ordners anzeigen"),
-            ("df -h", "Freien Festplattenspeicher aller Laufwerke anzeigen"),
+            ('find . -name "*.txt"', "Aktuellen Ordner rekursiv nach Dateinamen durchsuchen", "Dateien rekursiv finden"),
+            ("diff datei1.txt datei2.txt", "Unterschiede zwischen zwei Dateien anzeigen", "Unterschiede anzeigen"),
+            ("file datei", "Echten Dateityp ermitteln (unabhängig von Endung)", "Echten Dateityp ermitteln"),
+            ('du -sh "Ordner"', "Speicherplatzverbrauch eines Ordners anzeigen", "Speicherverbrauch anzeigen"),
+            ("df -h", "Freien Festplattenspeicher aller Laufwerke anzeigen", "Freien Speicher anzeigen"),
         ],
     ),
     (
         "8. KOMPRIMIERUNG & ARCHIVE",
         [
-            ('zip -r archiv.zip "Ordner"', "Ordner als ZIP-Archiv komprimieren"),
-            ("unzip archiv.zip", "ZIP-Archiv entpacken"),
-            ('tar -czf archiv.tar.gz "Ordner"', "Ordner als tar.gz-Archiv komprimieren"),
-            ("tar -xzf archiv.tar.gz", "tar.gz-Archiv entpacken"),
+            ('zip -r archiv.zip "Ordner"', "Ordner als ZIP-Archiv komprimieren", "Als ZIP komprimieren"),
+            ("unzip archiv.zip", "ZIP-Archiv entpacken", "ZIP-Archiv entpacken"),
+            ('tar -czf archiv.tar.gz "Ordner"', "Ordner als tar.gz-Archiv komprimieren", "Als tar.gz komprimieren"),
+            ("tar -xzf archiv.tar.gz", "tar.gz-Archiv entpacken", "tar.gz entpacken"),
         ],
     ),
     (
         "9. PROZESSE & SYSTEMKONTROLLE",
         [
-            ("top", "Live-Übersicht aller Prozesse und CPU-Auslastung"),
-            ('ps aux | grep "Programm"', "Laufende Prozesse filtern und PID finden"),
-            ("kill PID", "Prozess über Prozessnummer (PID) beenden"),
-            ('killall "Programm"', "Laufendes Programm anhand des Namens schließen"),
+            ("top", "Live-Übersicht aller Prozesse und CPU-Auslastung", "Live-Prozessübersicht"),
+            ('ps aux | grep "Programm"', "Laufende Prozesse filtern und PID finden", "Prozesse filtern"),
+            ("kill PID", "Prozess über Prozessnummer (PID) beenden", "Prozess via PID beenden"),
+            ('killall "Programm"', "Laufendes Programm anhand des Namens schließen", "Programm via Name beenden"),
         ],
     ),
     (
         "10. PIPES & UMLEITUNGEN",
         [
-            ("befehl > datei.txt", "Ausgabe in Datei schreiben (überschreibt)"),
-            ("befehl >> datei.txt", "Ausgabe an bestehende Datei anhängen"),
-            ("befehl1 | befehl2", "Ausgabe von Befehl 1 an Befehl 2 weiterleiten"),
+            ("befehl > datei.txt", "Ausgabe in Datei schreiben (überschreibt)", "Ausgabe schreiben"),
+            ("befehl >> datei.txt", "Ausgabe an bestehende Datei anhängen", "Ausgabe anhängen"),
+            ("befehl1 | befehl2", "Ausgabe von Befehl 1 an Befehl 2 weiterleiten", "Ausgabe weiterleiten"),
         ],
     ),
     (
         "11. MACOS-SPEZIFISCHE BEFEHLE",
         [
-            ("open .", "Aktuellen Ordner im macOS Finder öffnen"),
-            ("open datei.txt", "Datei im Standardprogramm öffnen"),
-            ('open -a "App" datei.txt', "Datei mit bestimmter Anwendung öffnen"),
-            ("pbcopy < datei.txt", "Dateiinhalt direkt in macOS-Zwischenablage kopieren"),
-            ("pbpaste > datei.txt", "Zwischenablage in neue Datei einfügen"),
-            ("caffeinate -d", "Ruhezustand des Displays temporär verhindern"),
+            ("open .", "Aktuellen Ordner im macOS Finder öffnen", "Im Finder öffnen"),
+            ("open datei.txt", "Datei im Standardprogramm öffnen", "Im Standardprogramm öffnen"),
+            ('open -a "App" datei.txt', "Datei mit bestimmter Anwendung öffnen", "Mit App öffnen"),
+            ("pbcopy < datei.txt", "Dateiinhalt direkt in macOS-Zwischenablage kopieren", "In Zwischenablage kopieren"),
+            ("pbpaste > datei.txt", "Zwischenablage in neue Datei einfügen", "Zwischenablage einfügen"),
+            ("caffeinate -d", "Ruhezustand des Displays temporär verhindern", "Ruhezustand verhindern"),
         ],
     ),
     (
         "12. TASTENKÜRZEL",
         [
-            ("[Tab]", "Autovervollständigung für Pfade und Dateinamen"),
-            ("Pfeil Hoch", "Vorherigen Befehl aus Verlauf abrufen"),
-            ("Pfeil Runter", "Nächsten Befehl aus Verlauf abrufen"),
-            ("Strg / Ctrl + C", "Laufenden Befehl sofort abbrechen"),
-            ("Strg / Ctrl + L", "Bildschirm leeren (Alternative: clear)"),
-            ("Strg / Ctrl + R", "Befehlsverlauf interaktiv durchsuchen"),
-            ("Strg / Ctrl + A", "Cursor an den Zeilenanfang setzen"),
-            ("Strg / Ctrl + E", "Cursor an das Zeilenende setzen"),
-            ("Strg / Ctrl + U", "Gesamte Zeile vor Cursor löschen"),
-            ("history", "Liste der zuletzt ausgeführten Befehle"),
+            ("[Tab]", "Autovervollständigung für Pfade und Dateinamen", "Autovervollständigung"),
+            ("Pfeil Hoch", "Vorherigen Befehl aus Verlauf abrufen", "Vorheriger Befehl"),
+            ("Pfeil Runter", "Nächsten Befehl aus Verlauf abrufen", "Nächster Befehl"),
+            ("Strg / Ctrl + C", "Laufenden Befehl sofort abbrechen", "Befehl sofort abbrechen"),
+            ("Strg / Ctrl + L", "Bildschirm leeren (Alternative: clear)", "Bildschirm leeren"),
+            ("Strg / Ctrl + R", "Befehlsverlauf interaktiv durchsuchen", "Verlauf durchsuchen"),
+            ("Strg / Ctrl + A", "Cursor an den Zeilenanfang setzen", "An den Zeilenanfang"),
+            ("Strg / Ctrl + E", "Cursor an das Zeilenende setzen", "An das Zeilenende"),
+            ("Strg / Ctrl + U", "Gesamte Zeile vor Cursor löschen", "Zeile vor Cursor löschen"),
+            ("history", "Liste der zuletzt ausgeführten Befehle", "Befehlsverlauf anzeigen"),
         ],
     ),
     (
         "13. SYSTEMPFADE",
         [
-            ("~ (Home)", "Sicherer Arbeitsbereich (/Users/...)"),
-            ("/bin, /System", "Geschützte Systemordner (niemals löschen/ändern)"),
+            ("~ (Home)", "Sicherer Arbeitsbereich (/Users/...)", "Sicherer Arbeitsbereich"),
+            ("/bin, /System", "Geschützte Systemordner (niemals löschen/ändern)", "Geschützte Systemordner"),
         ],
     ),
 ]
+
+def get_item_desc(item: tuple, width: int) -> str:
+    """Wählt dynamisch die optimale Beschreibungsvariante anhand der verfügbaren Breite."""
+    long_desc = item[1]
+    short_desc = item[2] if len(item) > 2 else long_desc
+    # Wenn die Spaltenbreite unter 85 Spalten liegt, greift die prägnante Kurzform
+    if width < 85:
+        return short_desc
+    return long_desc
 
 def get_terminal_size_robust(default_cols: int = 80, default_lines: int = 24) -> tuple[int, int]:
     """Ermittelt zuverlässig Spalten und Zeilen des echten Terminals, auch in Pipes."""
@@ -264,11 +274,15 @@ def filter_entries(search_term: str):
     total_matches = 0
     for section_title, items in CATEGORIES:
         matching_items = []
-        for cmd, desc in items:
+        for item in items:
+            cmd = item[0]
+            long_desc = item[1]
+            short_desc = item[2] if len(item) > 2 else ""
             if (normalized_term in cmd.lower() or
-                normalized_term in desc.lower() or
+                normalized_term in long_desc.lower() or
+                normalized_term in short_desc.lower() or
                 normalized_term in section_title.lower()):
-                matching_items.append((cmd, desc))
+                matching_items.append(item)
         if matching_items:
             filtered.append((section_title, matching_items))
             total_matches += len(matching_items)
@@ -293,10 +307,9 @@ def print_footer(width: int, compact_vert: bool = False):
     print(f"{BOLD}Navigation:{RESET} Pfeiltasten für Befehlsverlauf | {BOLD_CYAN}[Tab]{RESET} Autovervollständigung")
     print(f"{BOLD}Optionen:{RESET} {CYAN}sz -h{RESET} (Hilfe) | {CYAN}sz -k{RESET} (Kompakt) | {CYAN}sz -s <begriff>{RESET} (Suchen)\n")
 
-def calc_optimal_cmd_col(items: list[tuple[str, str]], width: int) -> int:
+def calc_optimal_cmd_col(items: list[tuple], width: int) -> int:
     """Berechnet die maßgeschneiderte Spaltenbreite für Befehls-Badges im Abschnitt."""
-    # Berücksichtige die sichtbare Länge des Badges (inklusive Rand-Leerzeichen)
-    badge_lens = [visible_len(make_cmd_badge(c)) for c, _ in items]
+    badge_lens = [visible_len(make_cmd_badge(c[0])) for c in items]
     sorted_lens = sorted(badge_lens)
     max_cmd = sorted_lens[-1]
 
@@ -314,7 +327,7 @@ def calc_optimal_cmd_col(items: list[tuple[str, str]], width: int) -> int:
 
     return cmd_col
 
-def format_section_lines(section_title: str, items: list[tuple[str, str]], width: int, force_compact: bool, force_table: bool) -> list[str]:
+def format_section_lines(section_title: str, items: list[tuple], width: int, force_compact: bool, force_table: bool) -> list[str]:
     """Erzeugt formatierte Zeilen eines Abschnitts für ein- oder mehrspaltige Ausgabe."""
     lines = []
     lines.append(make_header_badge(section_title))
@@ -322,7 +335,9 @@ def format_section_lines(section_title: str, items: list[tuple[str, str]], width
 
     # Bei erzwungenem Kompaktmodus oder extrem schmalem Fenster (< 54 Spalten): reine Zweizeilenform
     if force_compact or (width < 54 and not force_table):
-        for cmd, desc in items:
+        for item in items:
+            cmd = item[0]
+            desc = get_item_desc(item, width)
             badge = make_cmd_badge(cmd)
             lines.append(f"  {BOLD_BLUE}▸{RESET} {badge}")
             for l in textwrap.wrap(desc, width=max(16, width - 4)):
@@ -334,7 +349,9 @@ def format_section_lines(section_title: str, items: list[tuple[str, str]], width
     gap = 2
     desc_width = max(16, width - 4 - cmd_col - gap)
 
-    for cmd, desc in items:
+    for item in items:
+        cmd = item[0]
+        desc = get_item_desc(item, width)
         badge = make_cmd_badge(cmd)
         b_len = visible_len(badge)
         if b_len <= cmd_col:
@@ -354,7 +371,6 @@ def format_section_lines(section_title: str, items: list[tuple[str, str]], width
 def render_single_column(categories, width: int, force_compact: bool, force_table: bool, compact_vert: bool):
     """Rendert Abschnitte einspaltig mit garantiertem Abstand vor Überschriften."""
     for i, (title, items) in enumerate(categories):
-        # Bei kompakter Darstellung oder vor Überschriften ab Abschnitt 2 stets ein sichtbarer Abstand
         if i > 0:
             print()
         lines = format_section_lines(title, items, width, force_compact, force_table)
