@@ -44,8 +44,8 @@ curl -fsSL https://raw.githubusercontent.com/jonathank55/spickzettel/main/instal
 
 1. **Repository klonen:**
    ```bash
-   git clone https://github.com/jonathank55/spickzettel.git
-   cd spickzettel
+   git clone https://github.com/jonathank55/spickzettel.git ~/.spickzettel
+   cd ~/.spickzettel
    ```
 
 2. **Installationsskript ausführen:**
